@@ -3,66 +3,85 @@
 	width: 200px;
 	float: left;
 	clear: right;
-
 }
+
 #div2 {
 	height: 655px;
 	float: left;
-	width: 1100px;
-	margin-left:10px;
-
-	;
+	width: 1095px;
+	margin-left: 6px;
+	margin-top: -1px;
 }
+
 #div_top {
 	height: 177px;
-	width: 1100px;
+	width: 1099px;
 	clear: right;
 	float: left;
 	margin-top: 15px;
+	background-color: #EDECEB;
 }
+
 #div_bottom {
-	width: 1100px;
-	clear: left;
-	float: right;
+	width: 1099px;
+	clear: right;
+	float: left;
 	height: 437px;
-	margin-top: -432px
+	background-color: #EDECEB;
+	margin-top: 28px;
+}
+
 }
 #div_main {
 	height: 714px;
 	width: 1310px;
 	background-image: url(../pictures/inbox.png);
-	display:block;
-	margin:auto;
+	display: block;
+	margin: auto;
 }
+
 #div0 {
 	height: 54px;
 	width: auto;
 }
 
-.scrollit{
-	overflow:scroll;
-	height:145px;
-	width:99%;
+.scrollit {
+	overflow: scroll;
+	height: 145px;
+	width: 99%;
 }
 
-.scrollit1{
-	overflow:scroll;
-	height:400px;
-	width:99%;
+.scrollit1 {
+	overflow: scroll;
+	height: 400px;
+	width: 99%;
 }
 
 #from_width {
 	width: 20%;
+	text-align: center;
 }
+
 #subject_width {
-	width: 60%;
+	width: 50%;
 }
+
 #date_width {
 	width: 20%;
 	text-align: center;
-
 }
+
 #attach_width {
 	width: 10%;
 	text-align: center;
+}
+
+#tb_header {
+	background-color: #EDECEB;
+}
+
+a {
+	display: block;
+	text-decoration: none;
+	height: 100%;
 }

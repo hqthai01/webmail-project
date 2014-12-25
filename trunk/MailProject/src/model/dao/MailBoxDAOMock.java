@@ -1,6 +1,9 @@
 package model.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import model.Mail;
 import model.MailBox;
@@ -105,6 +108,8 @@ public class MailBoxDAOMock {
 			mailbox.addMail(new Mail("abc@abc.com", "test@xyz.com", "Test Subject", "abc def ght", new ArrayList<String>(), Mail.FLAG_SENT));
 			mailbox.addMail(new Mail("abc@abc.com", "test@xyz.com", "Test Subject", "abc def ght", new ArrayList<String>(), Mail.FLAG_SENT));
 			mailbox.addMail(new Mail("abc@abc.com", "test@xyz.com", "Test Subject", "abc def ght", new ArrayList<String>(), Mail.FLAG_SENT));
+			
+			Collections.shuffle(mailbox.getListMail());
 			return mailbox;
 		}
 		return null;
