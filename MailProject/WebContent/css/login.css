@@ -1,0 +1,39 @@
+#div_login {
+	background-color: #EDECEB;
+	background-image: url(../pictures/login.png);
+	height: 228px;
+	width: 566px;
+	background-position: center;
+	display: block;
+	margin: auto;
+	margin-top: 15%;
+}
+#div_body {
+	background-color: #EDECEB;
+	width:auto;
+	height:auto;
+	alignment-adjust:central;
+
+}
+#tf_username {
+	height: 22px;
+	width: 220px;
+	margin-top: 82px;
+	margin-left: 312px;
+}
+#tf_password {
+	height: 22px;
+	width: 220px;
+	margin-top: 5px;
+	margin-left: 312px;
+}
+#sm_login {
+	height: 31px;
+	width: 106px;
+	margin-left: 311px;
+	margin-top: 6px;
+}
+#sm_register {
+	height: 31px;
+	width: 119px;
+}
