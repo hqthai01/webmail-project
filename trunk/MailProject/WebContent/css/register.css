@@ -1,0 +1,73 @@
+#div_body {
+	background-image: url(../pictures/register.png);
+	height: 470px;
+	width: 410px;
+	margin: auto;
+	margin-top: 6%;
+}
+#tf_account {
+	height: 20px;
+	width: 261px;
+	margin-top: 89px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 111px;
+}
+#tf_password {
+	height: 20px;
+	width: 261px;
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 111px;
+}
+#tf_confirm {
+	height: 20px;
+	width: 261px;
+	margin-left: 111px;
+	margin-top: 6px;
+}
+#tf_fullname {
+	height: 20px;
+	width: 262px;
+	margin-left: 110px;
+	margin-top: 74px;
+}
+#tf_country {
+	height: 20px;
+	width: 262px;
+	margin-left: 110px;
+	margin-top: 4px;
+}
+#tf_phone {
+	height: 20px;
+	width: 262px;
+	margin-top: 4px;
+	margin-left: 110px;
+}
+#select_org {
+	margin-top: 4px;
+	margin-left: 110px;
+	height: 26px;
+	width: 270px;
+}
+#sm_register {
+	margin-left: 12px;
+	margin-top: 39px;
+	width: 123px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+#rs_clearfields {
+	width: 132px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
+#sm_close {
+	margin-left: 0px;
+	width: 124px;
+	padding-top: 4px;
+	padding-right: 0px;
+	padding-bottom: 4px;
+	padding-left: 0px;
+}
