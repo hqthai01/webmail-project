@@ -1,57 +1,40 @@
+<%@page import="java.sql.Date"%>
+<%@page import="java.lang.ProcessBuilder.Redirect"%>
 <%@page import="model.User"%>
 <%@page import="model.MailBox"%>
+<%@page import="model.Mail" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
-	if (session.getAttribute("username") == null) {
-
-	}
-%>
-<title>${requestScope.username }" : " Inbox</title>
+	MailBox mb = null;
+	if (session.getAttribute("username") == null || session.getAttribute("username")=="") {
+	%>
+	<jsp:forward page="/index.jsp"></jsp:forward>	
+	<%} else{%>
+	<%
+	mb = (MailBox)session.getAttribute("mailbox");
+} %>
+<title>[${sessionScope.username } : Inbox]</title>
 <link rel="stylesheet" type="text/css" href="css/inbox.css">
 </head>
 <body>
-	<form action="DoCheckMail" method="post">
-		<div id="div_main">
-			<div id="div0"></div>
-			<div id="div1">
-				<input style="width: 100%" name="newmail" type="submit"
-					value="Compose Mail" /> <input style="width: 100%" name="newmail"
-					type="submit" value="Inbox" /> <input style="width: 100%"
-					name="newmail" type="submit" value="Sent Mail" />
-			</div>
-			<div id="div2">
-				<div id="div_top">
-					<table width="99%" border="1">
-						<tr>
-							<th id="from_width">From</th>
-							<th id="subject_width">Subject</th>
-							<th id="attach_width">Attachment</th>
-							<th id="date_width">Date</th>
-						</tr>
-					</table>
-					<div class="scrollit">
-						<tbody>
-							<table width="100%" border="0">
-								<tr>
-									<td id="from_width">holdthehand@gmail.com</td>
-									<td id="subject_width">Fuck you co ho'</td>
-									<td id="attach_width">flase</td>
-									<td id="date_width">24/12/2014</td>
-								</tr>
-							</table>
-						</tbody>
-					</div>
-				</div>
-			</div>
-			<div id="div_bottom">
-				<table width="99%" border="1">
+	
+	<div id="div_main">
+		<div id="div0"></div>
+		<div id="div1">
+			<input style="width:100%" name="action" type="submit" value="Compose Mail" />
+			<input style="width:100%" name="action" type="submit" value="Inbox" />
+			<input style="width:100%" name="action" type="submit" value="Sent Mail" />
+		</div>
+		<div id="div2">
+			<div id="div_top">
+				<table id="tb_header" width="99%" border="0">
 					<tr>
 						<th id="from_width">From</th>
 						<th id="subject_width">Subject</th>
@@ -59,20 +42,64 @@
 						<th id="date_width">Date</th>
 					</tr>
 				</table>
-				<div class="scrollit1">
+				<div class="scrollit">
 					<tbody>
 						<table width="100%" border="0">
-							<tr>
-								<td id="from_width">holdthehand@gmail.com</td>
-								<td id="subject_width">Fuck you co ho'</td>
-								<td id="attach_width">false</td>
-								<td id="date_width">24/12/2014</td>
-							</tr>
+							<%if(mb!= null && mb.getListMail().size()!=0){
+							for(int i =0 ; i <mb.getListMail().size(); i++){
+								Mail mail = mb.getListMail().get(i);
+							if(mail.getFlag() == Mail.FLAG_UNREAD){
+							%>
+							
+								<tr>
+									<td id="from_width"><a href="DoReadMail?pos=<%=i %>"><%=mail.getFrom() %></a></td>
+									<td id="subject_width" ><a href="DoReadMail?pos=<%=i %>"><%=mail.getSubject()%></a></td>
+									<td id="attach_width" ><a href="DoReadMail?pos=<%=i %>"><%=mail.getListAttachment().size()%></a></td>
+									<td id="date_width" ><a href="DoReadMail?pos=<%=i %>"><%=new Date(mail.getDate().getTime()) %></a></td>
+								</tr>
+							
+							<%} %>
+							<%} %>
+							<%} %>                  
+						
 						</table>
 					</tbody>
 				</div>
 			</div>
+			<div id="div_bottom">
+		<table id="tb_header" width="99%" border="0">
+			<tr>
+				<th id="from_width">From</th>
+				<th id="subject_width">Subject</th>
+				<th id="attach_width">Attachment</th>
+				<th id="date_width">Date</th>
+			</tr>
+		</table>
+		<div class="scrollit1">
+			<tbody>
+				<table width="100%" border="0">
+					<%if(mb!= null && mb.getListMail().size()!=0){
+							for(int i =0 ; i <mb.getListMail().size(); i++){
+								Mail mail = mb.getListMail().get(i);
+							if(mail.getFlag() == Mail.FLAG_READ){
+							%>
+								<tr>
+									<td id="from_width"><a href="DoReadMail?pos=<%=i %>"><%=mail.getFrom() %></a></td>
+									<td id="subject_width" ><a href="DoReadMail?pos=<%=i %>"><%=mail.getSubject()%></a></td>
+									<td id="attach_width" ><a href="DoReadMail?pos=<%=i %>"><%=mail.getListAttachment().size()%></a></td>
+									<td id="date_width" ><a href="DoReadMail?pos=<%=i %>"><%=new Date(mail.getDate().getTime()) %></a></td>
+								</tr>
+							
+							<%} %>
+							<%} %>
+							<%} %>   
+				</table>
+			</tbody>
 		</div>
-	</form>
+	</div>
+		</div>
+	
+	</div>
+
 </body>
 </html>

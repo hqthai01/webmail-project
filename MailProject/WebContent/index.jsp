@@ -11,6 +11,7 @@
 <body>
 <% request.setCharacterEncoding("UTF-8");
    response.setCharacterEncoding("UTF-8");
+   session.invalidate();
 %> 
 	<form name="login_form" method="post" action="DoLogin">
 		<div id="div_login">

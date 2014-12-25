@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.dao.MailBoxDAOMock;
+import model.dao.UserDAOMock;
 
 /**
  * Servlet implementation class DoLogin
@@ -38,14 +39,18 @@ public class DoLogin extends HttpServlet {
 		String username = (String) request.getParameter("username");
 		String password = (String) request.getParameter("password");
 		String action = (String) request.getParameter("action");
-		
+
 		HttpSession session = request.getSession();
-		
-		if (action.equalsIgnoreCase("login")) {
-			if (!checkLogin(username, password)) {
+		if (action == null) {
+			if (session.getAttribute("username") != null) {
+				request.getRequestDispatcher("/inbox.jsp").forward(request, response);
+			}else{
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			}
+		} else if (action.equalsIgnoreCase("login")) {
+			if (username == null || !checkLogin(username, password)) {
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			} else {
-				request.setAttribute("username", username);
 				session.setAttribute("username", username);
 				session.setAttribute("mailbox", MailBoxDAOMock.getMailBox(username));
 				request.getRequestDispatcher("/inbox.jsp").forward(request, response);
@@ -57,7 +62,7 @@ public class DoLogin extends HttpServlet {
 
 	private boolean checkLogin(String username, String password) {
 		try {
-			return false;
+			return UserDAOMock.getUser(username).getPassword().equals(password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

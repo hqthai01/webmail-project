@@ -10,7 +10,7 @@ public class UserDAOMock {
 		usr.setAccount("hqthai01");
 		usr.setPassword("holdholdme");
 		usr.setFullname("HQ.THAI");
-		usr.setMailBox(MailBoxDAOMock.getMailBox(usr.getAccount()));
+//		usr.setMailBox(MailBoxDAOMock.getMailBox(usr.getAccount()));
 		usr.setOrg(org);
 		usr.setPhone("01636755316");
 		return usr;

@@ -49,4 +49,14 @@
     <servlet-name>DoCheckMail</servlet-name>
     <url-pattern>/DoCheckMail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoReadMail</display-name>
+    <servlet-name>DoReadMail</servlet-name>
+    <servlet-class>controller.DoReadMail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoReadMail</servlet-name>
+    <url-pattern>/DoReadMail</url-pattern>
+  </servlet-mapping>
 </web-app>
