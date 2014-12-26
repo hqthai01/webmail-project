@@ -14,7 +14,7 @@ public class Organization implements Serializable {
 
 	private String orgDomain;
 	private String orgName;
-	private String certificate;
+	private Certificate certificate;
 
 	@Id
 	@GeneratedValue
@@ -34,17 +34,17 @@ public class Organization implements Serializable {
 		this.orgName = orgName;
 	}
 
-	public String getCertificate() {
+	public Certificate getCertificate() {
 		return certificate;
 	}
 
-	public void setCertificate(String certificate) {
+	public void setCertificate(Certificate certificate) {
 		this.certificate = certificate;
 	}
 
 	@Override
 	public String toString() {
-		return "Organization [orgDomain=" + orgDomain + ", orgName=" + orgName + ", certificate=" + certificate + "]";
+		return "Organization [orgDomain=" + orgDomain + ", orgName=" + orgName + ", certificate=" + certificate.getFileName() + "]";
 	}
 
 }

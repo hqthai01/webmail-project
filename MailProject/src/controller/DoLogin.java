@@ -56,7 +56,7 @@ public class DoLogin extends HttpServlet {
 				request.getRequestDispatcher("/inbox.jsp").forward(request, response);
 			}
 		} else if (action.equalsIgnoreCase("register")) {
-			request.getRequestDispatcher("/register.jsp").forward(request, response);
+//			request.getRequestDispatcher("Register").forward(request, response);
 		}
 	}
 

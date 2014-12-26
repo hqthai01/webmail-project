@@ -32,10 +32,16 @@
 	<div id="div_main">
 		<div id="div0"></div>
 		<div id="div1">
-			<input style="width: 100%" name="action" type="submit"
-				value="Compose Mail" /> <input style="width: 100%" name="action"
-				type="submit" value="Inbox" /> <input style="width: 100%"
-				name="action" type="submit" value="Sent Mail" />
+			<form action="DoComposeMail" method="post" >
+				<input style="width: 100%" name="action" type="submit" value="Compose Mail" />
+			</form> 
+			<form action="DoCheckMail" method="post" >
+				<input style="width: 100%" name="action" type="submit" value="Inbox" />
+			</form>
+			<form action="DoViewSentMail" method="post" > 
+				<input style="width: 100%" name="action" type="submit" value="Sent Mail" />
+			</form>
+			
 		</div>
 		<div id="div2">
 			<div id="div_top">
@@ -48,8 +54,8 @@
 					</tr>
 				</table>
 				<div class="scrollit">
-					<tbody>
-						<table width="100%" border="0">
+					<table width="100%" border="0">
+						<tbody>
 							<%
 								if (mb != null && mb.getListMail().size() != 0) {
 									for (int i = 0; i < mb.getListMail().size(); i++) {
@@ -74,8 +80,8 @@
 								}
 							%>
 
-						</table>
-					</tbody>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<div id="div_bottom">
@@ -88,8 +94,8 @@
 					</tr>
 				</table>
 				<div class="scrollit1">
-					<tbody>
-						<table width="100%" border="0">
+					<table width="100%" border="0">
+						<tbody>
 							<%
 								if (mb != null && mb.getListMail().size() != 0) {
 									for (int i = 0; i < mb.getListMail().size(); i++) {
@@ -112,13 +118,11 @@
 							<%
 								}
 							%>
-						</table>
-					</tbody>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 </body>
 </html>

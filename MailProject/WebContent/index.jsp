@@ -13,13 +13,15 @@
    response.setCharacterEncoding("UTF-8");
    session.invalidate();
 %> 
+	<form method="post" action="Register" id="register_form"></form>
 	<form name="login_form" method="post" action="DoLogin">
 		<div id="div_login">
 			<input type="text" name="username" id="tf_username" />
 			<input type="password" name="password" id="tf_password" />
 			<input name="action" type="submit" id="sm_login" value="Login" />
-			<input name="action" type="submit" id="sm_register" value="Register"/>
+			<input name="action" type="submit" id="sm_register" value="Register" form="register_form"/>
 		</div>
-	</form>
+		</form>
+	
 </body>
 </html>

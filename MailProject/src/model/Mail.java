@@ -29,9 +29,7 @@ public class Mail implements Serializable {
 	private MailBox mailbox;
 	private int flag;
 
-	private List<String> listAttachment;
-	
-	
+	private List<Attachment> listAttachment;
 
 	@Override
 	public String toString() {
@@ -39,116 +37,81 @@ public class Mail implements Serializable {
 				+ "]";
 	}
 
-
-
 	@Id
 	@GeneratedValue
 	public int getMailId() {
 		return mailId;
 	}
 
-
-
 	public void setMailId(int mailId) {
 		this.mailId = mailId;
 	}
-
-
 
 	public String getFrom() {
 		return from;
 	}
 
-
-
 	public void setFrom(String from) {
 		this.from = from;
 	}
-
-
 
 	public String getTo() {
 		return to;
 	}
 
-
-
 	public void setTo(String to) {
 		this.to = to;
 	}
-
-
 
 	public String getSubject() {
 		return subject;
 	}
 
-
-
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-
-
 
 	public String getMessage() {
 		return message;
 	}
 
-
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-
 
 	public Date getDate() {
 		return date;
 	}
 
-
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
-
-
 	@ManyToOne
-	@JoinColumn(name="mailbox_id")
+	@JoinColumn(name = "mailbox_id")
 	public MailBox getMailbox() {
 		return mailbox;
 	}
-
-
 
 	public void setMailbox(MailBox mailbox) {
 		this.mailbox = mailbox;
 	}
 
-
-
 	public int getFlag() {
 		return flag;
 	}
-
-
 
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
 
-
-
-	
-	public List<String> getListAttachment() {
+	public List<Attachment> getListAttachment() {
 		return listAttachment;
 	}
 
-
-
-	public void setListAttachment(List<String> listAttachment) {
+	public void setListAttachment(List<Attachment> listAttachment) {
 		this.listAttachment = listAttachment;
 	}
+	
+	
 }

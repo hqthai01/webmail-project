@@ -36,7 +36,7 @@
 	width: 1310px;
 	background-image: url(../pictures/inbox.png);
 	display: block;
-	margin: auto;
+	margin: 2% auto auto;
 }
 
 #div0 {
@@ -47,13 +47,13 @@
 .scrollit {
 	overflow: scroll;
 	height: 145px;
-	width: 99%;
+	width: 100%;
 }
 
 .scrollit1 {
 	overflow: scroll;
-	height: 400px;
-	width: 99%;
+	height: 411px;
+	width: 100%;
 }
 
 #from_width {
