@@ -19,15 +19,16 @@
 </head>
 
 <body>
+<h4 style="text-align: center">${requestScope.flag }</h4>
 	<div id="div_body">
 		<form action="DoRegister" method="post">
-			<input name="account" type="text" id="tf_account"/>
+			<input name="account" type="text" id="tf_account" value="${requestScope.account }"/>
 			<input name="password" type="password" id="tf_password"/>
 			<input name="confirm" type="password" id="tf_confirm"/>
 
-			<input name="fullname" type="text" id="tf_fullname"/>
-			<input name="country" type="text" id="tf_country"/>
-			<input name="phone" type="text" id="tf_phone"/>
+			<input name="fullname" type="text" id="tf_fullname" value="${requestScope.fullname }"/>
+			<input name="country" type="text" id="tf_country" value="${requestScope.country }"/>
+			<input name="phone" type="text" id="tf_phone" value="${requestScope.phone }"/>
 			<select name="org" id="select_org">
 			<%
 				for(Organization org : list){

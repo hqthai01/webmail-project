@@ -53,7 +53,7 @@
 					<%if(mail != null) {%>
 						<%if(mail.getListAttachment()!= null && mail.getListAttachment().size()!=0) {%>
 							<%for(int i = 0 ; i < mail.getListAttachment().size(); i++){ %>
-								<option value="${i }"><%=mail.getListAttachment().get(i) %></option>
+								<option value="${i }"><%=mail.getListAttachment().get(i).getFileName() %></option>
 							<%} %>
 						<%} %>
 					<%} %>

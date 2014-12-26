@@ -62,7 +62,7 @@ public class DoLogin extends HttpServlet {
 
 	private boolean checkLogin(String username, String password) {
 		try {
-			return UserDAOMock.getUser(username).getPassword().equals(password);
+			return UserDAOMock.checkUser(username,password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
