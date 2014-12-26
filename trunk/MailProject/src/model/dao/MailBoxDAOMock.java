@@ -3,7 +3,7 @@ package model.dao;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.mysql.fabric.xmlrpc.base.Array;
+
 
 import model.Mail;
 import model.MailBox;

@@ -2,15 +2,21 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class User implements Serializable {
 	private static final long serialVersionUID = 0xAF1L;
+	
 	private String account;
 	private String password;
 	private String fullname;
@@ -20,19 +26,8 @@ public class User implements Serializable {
 	private Organization org;
 	private MailBox mailBox;
 
-	public User(String account, String password, String fullname, String country, String phone, Organization org) {
-		this.account = account;
-		this.password = password;
-		this.fullname = fullname;
-		this.country = country;
-		this.phone = phone;
-		this.org = org;
-		this.mailBox = new MailBox(this);
-	}
-
-	public User() {
-	}
-
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="mailBox_FK")
 	public MailBox getMailBox() {
 		return mailBox;
 	}
@@ -41,6 +36,8 @@ public class User implements Serializable {
 		this.mailBox = mailBox;
 	}
 
+	@ManyToOne(targetEntity=Organization.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="orgName")
 	public Organization getOrg() {
 		return org;
 	}
