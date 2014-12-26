@@ -59,4 +59,34 @@
     <servlet-name>DoReadMail</servlet-name>
     <url-pattern>/DoReadMail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoComposeMail</display-name>
+    <servlet-name>DoComposeMail</servlet-name>
+    <servlet-class>controller.DoComposeMail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoComposeMail</servlet-name>
+    <url-pattern>/DoComposeMail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoViewSentMail</display-name>
+    <servlet-name>DoViewSentMail</servlet-name>
+    <servlet-class>controller.DoViewSentMail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoViewSentMail</servlet-name>
+    <url-pattern>/DoViewSentMail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Register</display-name>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>controller.Register</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/Register</url-pattern>
+  </servlet-mapping>
 </web-app>

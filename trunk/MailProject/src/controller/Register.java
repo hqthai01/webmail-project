@@ -7,28 +7,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DoCheckMail
+ * Servlet implementation class Register
  */
-public class DoCheckMail extends HttpServlet {
+public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public DoCheckMail() {
-	}
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProc(request, response);
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProc(request, response);
 	}
 
-	private void doProc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doProc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
 		
-		request.getRequestDispatcher("/inbox.jsp").forward(request, response);
+		request.getRequestDispatcher("/register.jsp").forward(request, response);
 	}
 
 }
