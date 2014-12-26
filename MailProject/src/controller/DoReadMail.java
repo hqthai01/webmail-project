@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class DoReadMail
@@ -31,8 +32,10 @@ public class DoReadMail extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		String pos = (String) request.getParameter("pos");
-
-		if (pos != null && checkNumber(pos)) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("username") == null){
+			request.getRequestDispatcher("/index.jsp").forward(request, response);;
+		}else if (pos != null && checkNumber(pos)) {
 			request.setAttribute("pos", pos);
 			request.getRequestDispatcher("/read_mail.jsp").forward(request, response);
 		}
