@@ -16,12 +16,6 @@ public class Organization implements Serializable {
 	private String orgName;
 	private String certificate;
 
-	public Organization(String orgDomain, String orgName, String certificate) {
-		this.orgDomain = orgDomain;
-		this.orgName = orgName;
-		this.certificate = certificate;
-	}
-
 	@Id
 	@GeneratedValue
 	public String getOrgDomain() {
