@@ -11,6 +11,7 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	MailBox mb = null;
+	session.removeAttribute("items");
 	if (session.getAttribute("username") == null || session.getAttribute("username") == "") {
 %>
 <jsp:forward page="/index.jsp"></jsp:forward>

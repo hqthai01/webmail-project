@@ -1,3 +1,5 @@
+<%@page import="org.apache.commons.fileupload.FileItem"%>
+<%@page import="java.util.List"%>
 <%@page import="model.Mail"%>
 <%@page import="model.MailBox"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,7 +15,8 @@
 	<script src="ckeditor/config.js"type="text/javascript"></script>
 	<script src="ckeditor/build-config.js"type="text/javascript"></script>
 	<script src="ckeditor/style.js"type="text/javascript"></script>
-	
+	<script src="js/submit.js" type="text/javascript"></script>
+	<!-- <script src="js/showpopup.js" type="text/javascript"></script> -->
 	<%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
@@ -24,6 +27,11 @@
 		<%} else{%>
 		<%
 	} %>
+	
+	<%if((String)request.getAttribute("flag") != null){ %>
+		<%request.setAttribute("flag", null); %>
+		<jsp:forward page="DoComposeMail"></jsp:forward>
+	<%} %>
 </head>
 <body>
 	<div id="div_main">
@@ -39,6 +47,8 @@
 				<input style="width: 100%" name="action" type="submit" value="Sent Mail" />
 			</form>
 		</div>
+		<form action="DoUpload" method="post" enctype="multipart/form-data" name="form_upload" id="upload">
+		</form>
 		<form action="DoSendMail" method="post">
 		<div id="div2">
 			<div id="div_top">
@@ -49,11 +59,21 @@
 				</div>
 				<div id="div_attachment">
 					<div id="div_att_left">
-						<select id="attach" name="attach" multiple>
+						<select id="attach" name="attachment" multiple>
+						<%
+							@SuppressWarnings("unchecked")
+							List<FileItem> items = (List<FileItem>)session.getAttribute("items");
+							if(items != null){
+						%>
+							<%for(int i = 0 ; i < items.size(); i++){ %>
+								<option value="<%=i%>"><%=items.get(i).getName() %></option>
+							<%} %>
+						<%} %>
 						</select>
 					</div>
 					<div id="div_att_right">
-						<input id="attachfile" name="action" type="submit" value="Attach File" />
+						<!--  <input id="attachfile" name="browse" type="file" value="Attach Files" onclick="return showpopup('browse_files.jsp', 250, 180)"/>-->
+						<input id="attachfile" type="file" name="browse" value="Attach Files" form="upload" onchange="formSubmit('form_upload')" multiple="multiple"/>
 						<input id="removes" name="action" type="submit" value="Remove Selected" />
 					</div>
 				</div>

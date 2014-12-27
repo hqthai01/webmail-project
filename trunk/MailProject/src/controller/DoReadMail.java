@@ -1,14 +1,14 @@
 package controller;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import util.RegexUtil;
 
 /**
  * Servlet implementation class DoReadMail
@@ -35,22 +35,12 @@ public class DoReadMail extends HttpServlet {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("username") == null){
 			request.getRequestDispatcher("/index.jsp").forward(request, response);;
-		}else if (pos != null && checkNumber(pos)) {
+		}else if (pos != null && RegexUtil.isNumber(pos)) {
 			request.setAttribute("pos", pos);
 			request.getRequestDispatcher("/read_mail.jsp").forward(request, response);
 		}
 	}
 
-	private boolean checkNumber(String number) {
-		try {
-			String regex = "\\d+";
-			Pattern p = Pattern.compile(regex);
-			Matcher matcher = p.matcher(number);
-			return matcher.matches();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+	
 
 }
