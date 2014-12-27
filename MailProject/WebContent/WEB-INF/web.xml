@@ -89,4 +89,14 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoUpload</display-name>
+    <servlet-name>DoUpload</servlet-name>
+    <servlet-class>controller.DoUpload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoUpload</servlet-name>
+    <url-pattern>/DoUpload</url-pattern>
+  </servlet-mapping>
 </web-app>

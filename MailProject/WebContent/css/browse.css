@@ -1,0 +1,13 @@
+body {
+	background-color: #EDECEB;
+}
+
+#div_upload {
+	width: 250px;
+	height: 150px;
+	margin :auto;
+}
+
+#browse {
+	margin-top: 18%;
+}
