@@ -41,4 +41,8 @@ public class OrganizationDAOMock {
 		}
 		return null;
 	}
+	
+	public static boolean isExistOrg(String domainName){
+		return false;
+	}
 }

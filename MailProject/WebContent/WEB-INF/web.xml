@@ -99,4 +99,24 @@
     <servlet-name>DoUpload</servlet-name>
     <url-pattern>/DoUpload</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoRegisterOrg</display-name>
+    <servlet-name>DoRegisterOrg</servlet-name>
+    <servlet-class>controller.DoRegisterOrg</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoRegisterOrg</servlet-name>
+    <url-pattern>/DoRegisterOrg</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoVerify</display-name>
+    <servlet-name>DoVerify</servlet-name>
+    <servlet-class>controller.DoVerify</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoVerify</servlet-name>
+    <url-pattern>/DoVerify</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -91,9 +91,9 @@ public class DoSendMail extends HttpServlet {
 
 	private File createNewname(File file) {
 		int counter = 1;
+		String filename = file.getName().substring(0, file.getName().length() - 4);
+		String extension = file.getName().substring(file.getName().length() - 4);
 		while (file.exists()) {
-			String filename = file.getName().substring(0, file.getName().length() - 4);
-			String extension = file.getName().substring(file.getName().length() - 4);
 			file = new File(file.getParent() + "/" + filename + (counter++) + extension);
 		}
 		return file;
