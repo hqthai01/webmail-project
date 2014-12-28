@@ -11,21 +11,15 @@
 	<%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
-	
-	if (session.getAttribute("username") == null || session.getAttribute("username")=="") {
-		%>
-		<jsp:forward page="/index.jsp"></jsp:forward>	
-		<%} else{%>
-		<%
-	} %>
+	session.removeAttribute("filename");
+	%>
 </head>
 
 <body>
-	<form action="DoUpload" method="post" enctype="multipart/form-data" name="form_upload"> 
+	<form action="DoVerify" method="post" enctype="multipart/form-data" name="form_upload"> 
 		<div id="div_upload">
 			<center>
-				<input id="browse" type="file"  name="files" multiple="multiple"/>
-				<br/>
+				<input id="browse" type="file" name="files" /> <br/>
 				<input type="button" name="action" value="Attach files" onclick="closeSelf('form_upload')"/>
 			</center>
 		</div>
