@@ -9,14 +9,13 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/mail_server</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/mailserver</property>
+        
 <!--         <property name="connection.username">root</property>
         <property name="connection.password">angellove77641</property> -->
-
-
 		
-		<property name="connection.username">annvcit</property>
-        <property name="connection.password">nguyenvanchucan</property>
+		<property name="connection.username">root</property>
+        <property name="connection.password">angellove77641</property>
 		
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">2</property>
@@ -35,11 +34,6 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
-	
-		<mapping class="model.Mail"/>
-		<mapping class="model.MailBox"/>
-		<mapping class="model.Organization"/>
-		<mapping class="model.User"/>
 
     </session-factory>
 

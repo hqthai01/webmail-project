@@ -5,15 +5,11 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table
 public class User implements Serializable {
 	private static final long serialVersionUID = 0xAF1L;
 	
@@ -27,7 +23,7 @@ public class User implements Serializable {
 	private MailBox mailBox;
 
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="mailBox_FK")
+	@JoinColumn(name="mailbox_FK")
 	public MailBox getMailBox() {
 		return mailBox;
 	}
@@ -36,8 +32,8 @@ public class User implements Serializable {
 		this.mailBox = mailBox;
 	}
 
-	@ManyToOne(targetEntity=Organization.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="orgName")
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="organization_FK")
 	public Organization getOrg() {
 		return org;
 	}
@@ -47,7 +43,6 @@ public class User implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue
 	public String getAccount() {
 		return account;
 	}

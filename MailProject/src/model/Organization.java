@@ -2,13 +2,14 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
-@Table
 public class Organization implements Serializable {
 	private static final long serialVersionUID = 0xA1L;
 
@@ -17,7 +18,6 @@ public class Organization implements Serializable {
 	private Certificate certificate;
 
 	@Id
-	@GeneratedValue
 	public String getOrgDomain() {
 		return orgDomain;
 	}
@@ -34,6 +34,8 @@ public class Organization implements Serializable {
 		this.orgName = orgName;
 	}
 
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="certificate_FK")
 	public Certificate getCertificate() {
 		return certificate;
 	}

@@ -2,6 +2,11 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Certificate implements Serializable {
 	private static final long serialVersionUID = 0xABE1L;
 
@@ -9,6 +14,8 @@ public class Certificate implements Serializable {
 	private String fileName;
 	private String filePath;
 
+	@Id
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}

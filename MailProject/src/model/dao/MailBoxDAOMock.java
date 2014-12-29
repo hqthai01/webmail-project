@@ -17,14 +17,13 @@ public class MailBoxDAOMock {
 			User usr = new User();
 			usr.setAccount(username);
 			MailBox mailbox = new MailBox();
-			mailbox.setUser(usr);
 			
 			Mail mail;
 			for (int i = 0; i < 200; i++) {
 				mail = new Mail();
-				mail.setMailId(i);
-				mail.setFrom("abc@abc.com");
-				mail.setTo("test@xyz.com");
+				mail.setId(i);
+				mail.setMail_From("abc@abc.com");
+				mail.setMail_To("test@xyz.com");
 				mail.setSubject("Test subject");
 				mail.setMessage("Example mail message body");
 				mail.setDate(new Date());
@@ -42,13 +41,13 @@ public class MailBoxDAOMock {
 
 				switch (rd.nextInt(2)) {
 				case 0:
-					mail.setListAttachment(AttachmentDAOMock.getAttachmentsOf(mail.getMailId()));
+					mail.setAttachments(AttachmentDAOMock.getAttachmentsOf(mail.getId()));
 					break;
 				case 1:
-					mail.setListAttachment(new ArrayList<Attachment>());
+					mail.setAttachments(new ArrayList<Attachment>());
 					break;
 				}
-				mailbox.addMail(mail);
+//				mailbox.addMail(mail);
 			}
 
 			return mailbox;

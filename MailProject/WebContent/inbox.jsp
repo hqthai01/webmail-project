@@ -58,16 +58,16 @@
 					<table width="100%" border="0">
 						<tbody>
 							<%
-								if (mb != null && mb.getListMail().size() != 0) {
-									for (int i = 0; i < mb.getListMail().size(); i++) {
-										Mail mail = mb.getListMail().get(i);
+								if (mb != null && mb.getMails().size() != 0) {
+									for (int i = 0; i < mb.getMails().size(); i++) {
+										Mail mail = mb.getMails().get(i);
 										if (mail.getFlag() == Mail.FLAG_UNREAD) {
 							%>
 
 							<tr>
-								<td id="from_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getFrom()%></a></td>
+								<td id="from_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getMail_From()%></a></td>
 								<td id="subject_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getSubject()%></a></td>
-								<td id="attach_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getListAttachment().size()%></a></td>
+								<td id="attach_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getAttachments().size()%></a></td>
 								<td id="date_width"><a href="DoReadMail?pos=<%=i%>"><%=new Date(mail.getDate().getTime())%></a></td>
 							</tr>
 
@@ -98,15 +98,15 @@
 					<table width="100%" border="0">
 						<tbody>
 							<%
-								if (mb != null && mb.getListMail().size() != 0) {
-									for (int i = 0; i < mb.getListMail().size(); i++) {
-										Mail mail = mb.getListMail().get(i);
-										if (mail.getFlag() == Mail.FLAG_READ) {
+								if (mb != null && mb.getMails().size() != 0) {
+														for (int i = 0; i < mb.getMails().size(); i++) {
+															Mail mail = mb.getMails().get(i);
+															if (mail.getFlag() == Mail.FLAG_READ) {
 							%>
 							<tr>
-								<td id="from_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getFrom()%></a></td>
+								<td id="from_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getMail_From()%></a></td>
 								<td id="subject_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getSubject()%></a></td>
-								<td id="attach_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getListAttachment().size()%></a></td>
+								<td id="attach_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getAttachments().size()%></a></td>
 								<td id="date_width"><a href="DoReadMail?pos=<%=i%>"><%=new Date(mail.getDate().getTime())%></a></td>
 							</tr>
 
