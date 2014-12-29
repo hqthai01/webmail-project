@@ -1,18 +1,21 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity
-@Table
 public class Mail implements Serializable {
 	private static final long serialVersionUID = 0xAF1L;
 
@@ -20,47 +23,48 @@ public class Mail implements Serializable {
 	public static final int FLAG_READ = 0x3A7;
 	public static final int FLAG_SENT = 0x3A8;
 
-	private int mailId;
-	private String from;
-	private String to;
+	private int id;
+	private String mail_from;
+	private String mail_to;
 	private String subject;
 	private String message;
 	private Date date;
+
 	private MailBox mailbox;
 	private int flag;
 
-	private List<Attachment> listAttachment;
-
-	@Override
-	public String toString() {
-		return "Mail " + "[from=" + from + ", " + "to=" + to + ", " + "subject=" + subject + ", message=" + message + ", attachments=" + listAttachment.size() + ", flag=" + flag + ", date=" + date
-				+ "]";
+	private List<Attachment> attachments;
+	
+	public Mail() {
+		attachments = new ArrayList<Attachment>();
 	}
 
 	@Id
 	@GeneratedValue
-	public int getMailId() {
-		return mailId;
+	public int getId() {
+		return id;
 	}
 
-	public void setMailId(int mailId) {
-		this.mailId = mailId;
+	public void setId(int Id) {
+		this.id = Id;
 	}
 
-	public String getFrom() {
-		return from;
+	public String getMail_From() {
+		return mail_from;
 	}
 
-	public void setFrom(String from) {
-		this.from = from;
+	@Column(name="mail_from")
+	public void setMail_From(String from) {
+		this.mail_from = from;
 	}
 
-	public String getTo() {
-		return to;
+	@Column(name="mail_to")
+	public String getMail_To() {
+		return mail_to;
 	}
 
-	public void setTo(String to) {
-		this.to = to;
+	public void setMail_To(String to) {
+		this.mail_to = to;
 	}
 
 	public String getSubject() {
@@ -105,13 +109,13 @@ public class Mail implements Serializable {
 		this.flag = flag;
 	}
 
-	public List<Attachment> getListAttachment() {
-		return listAttachment;
+	@OneToMany(targetEntity = Attachment.class, mappedBy = "mail", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	public List<Attachment> getAttachments() {
+		return attachments;
 	}
 
-	public void setListAttachment(List<Attachment> listAttachment) {
-		this.listAttachment = listAttachment;
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
 	}
-	
-	
+
 }

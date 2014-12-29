@@ -80,7 +80,7 @@ public class DoRegister extends HttpServlet {
 					user.setPhone(phone);
 
 					MailBox mailbox = new MailBox();
-					mailbox.setUser(user);
+//					mailbox.setUser(user);
 
 					user.setMailBox(mailbox);
 					
