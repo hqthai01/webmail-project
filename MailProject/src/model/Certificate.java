@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ public class Certificate implements Serializable {
 		this.id = id;
 	}
 
+	@Column(nullable=false)
 	public String getFileName() {
 		return fileName;
 	}
@@ -32,6 +34,7 @@ public class Certificate implements Serializable {
 		this.fileName = fileName;
 	}
 
+	@Column(nullable=false)
 	public String getFilePath() {
 		return filePath;
 	}

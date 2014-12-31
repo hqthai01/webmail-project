@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.MailBox;
 import model.Organization;
 import model.User;
-import model.dao.MailBoxDAOMock;
-import model.dao.OrganizationDAOMock;
-import model.dao.UserDAOMock;
+import model.dao.OrganizationDAO;
+import model.dao.UserDAO;
 
 /**
  * Servlet implementation class DoRegister
@@ -51,7 +50,7 @@ public class DoRegister extends HttpServlet {
 			if (isNull(account, password, confirm, fullname, country, phone, org)) {
 				request.setAttribute("flag", "The fields cannot be empty");
 				request.getRequestDispatcher("/register.jsp").forward(request, response);
-			} else if (UserDAOMock.isExist(account)) {
+			} else if (UserDAO.isExist(account)) {
 				request.setAttribute("flag", "Your username is exist");
 				
 				request.setAttribute("account", account);
@@ -69,27 +68,24 @@ public class DoRegister extends HttpServlet {
 				request.setAttribute("flag", "Your password confirmation is invalid");
 				request.getRequestDispatcher("/register.jsp").forward(request, response);
 			} else {
-				Organization organization = OrganizationDAOMock.getOrganization(org);
+				Organization organization = OrganizationDAO.getOrganization(org);
 				if (organization != null) {
+
+					MailBox mailbox = new MailBox();
 					User user = new User();
 					user.setAccount(account);
 					user.setPassword(password);
-					user.setCountry(country);
 					user.setFullname(fullname);
+					user.setCountry(country);
 					user.setOrg(organization);
 					user.setPhone(phone);
-
-					MailBox mailbox = new MailBox();
-//					mailbox.setUser(user);
-
 					user.setMailBox(mailbox);
 					
-					if(UserDAOMock.createNewUser(user) != -1){
-						if(MailBoxDAOMock.createNewMailBox(mailbox) != -1){
-							request.setAttribute("flag", "YOUR ACCOUNT HAS BEEN CREATED");
-							request.getRequestDispatcher("/regis_success.jsp").forward(request, response);
-						}
-					}
+					UserDAO.insert(user);
+					
+					request.setAttribute("flag", "YOUR ACCOUNT HAS BEEN CREATED");
+					request.getRequestDispatcher("/regis_success.jsp").forward(request, response);
+
 				} else {
 					request.setAttribute("flag", "HACK DETECTED: your Organization is invalid");
 					request.getRequestDispatcher("/register.jsp").forward(request, response);

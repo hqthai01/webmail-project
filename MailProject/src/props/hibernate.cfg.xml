@@ -34,6 +34,13 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
+        
+        <mapping class="model.Certificate"/>
+        <mapping class="model.Organization"/>
+        <mapping class="model.User"/>
+        <mapping class="model.Mail"/>
+        <mapping class="model.MailBox"/>
+        <mapping class="model.Attachment"/>
 
     </session-factory>
 

@@ -1,9 +1,9 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,10 +33,10 @@ public class Mail implements Serializable {
 	private MailBox mailbox;
 	private int flag;
 
-	private List<Attachment> attachments;
+	private Set<Attachment> attachments;
 	
 	public Mail() {
-		attachments = new ArrayList<Attachment>();
+		attachments = new HashSet<Attachment>();
 	}
 
 	@Id
@@ -109,13 +109,19 @@ public class Mail implements Serializable {
 		this.flag = flag;
 	}
 
-	@OneToMany(targetEntity = Attachment.class, mappedBy = "mail", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	public List<Attachment> getAttachments() {
+	@OneToMany(targetEntity = Attachment.class, mappedBy = "mail", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	public Set<Attachment> getAttachments() {
 		return attachments;
 	}
 
-	public void setAttachments(List<Attachment> attachments) {
+	public void setAttachments(Set<Attachment> attachments) {
 		this.attachments = attachments;
+	}
+
+	@Override
+	public String toString() {
+		return "Mail [id=" + id + ", mail_from=" + mail_from + ", mail_to=" + mail_to + ", subject=" + subject + ", message=" + message + ", date=" + date + ", mailbox=" + mailbox + ", flag="
+				+ flag + ", attachments=" + attachments.size() + "]";
 	}
 
 }

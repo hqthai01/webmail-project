@@ -1,4 +1,6 @@
-<%@page import="model.MailBox"%>
+<%@page import="model.dao.MailDAO"%>
+<%@page import="model.Attachment"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="model.Mail"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -9,18 +11,15 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
-	MailBox mb = null;
-	Mail mail = null;
+	Mail mail = (Mail)request.getAttribute("mail");
 	if (session.getAttribute("username") == null || session.getAttribute("username")=="") {
 		%>
 		<jsp:forward page="/index.jsp"></jsp:forward>	
 		<%} else{%>
 		<%
-		mb = (MailBox)session.getAttribute("mailbox");
 		String pos = (String)request.getAttribute("pos");
 		if(pos!= null){
-			mail = mb.getListMail().get(Integer.parseInt(pos));
-			request.setAttribute("mail", mail);
+			/* mail = MailDAO.getMail(Integer.parseInt(pos)); */
 		}
 	} %>
 <title>[${sessionScope.username } : Read Mail]</title>
@@ -44,16 +43,19 @@
 		<div id="div2">
 			<div id="div_top">
 				<div id="div_top_left">
-					<input id="tf_from" readonly="readonly" name="from" type="text" value="${requestScope.mail.getFrom() }" >
-					<input id="tf_to" readonly="readonly" name="to" type="text" value="${requestScope.mail.getTo() }" />
+					<input id="tf_from" readonly="readonly" name="from" type="text" value="${requestScope.mail.getMail_From() }" >
+					<input id="tf_to" readonly="readonly" name="to" type="text" value="${requestScope.mail.getMail_To() }" />
 					<input id="tf_subject" readonly="readonly" name="subject" type="text" value="${requestScope.mail.getSubject() }"/>
 				</div>
 				<div id="div_top_mid">
 					<select id="attach" name="attach" multiple>
 					<%if(mail != null) {%>
-						<%if(mail.getListAttachment()!= null && mail.getListAttachment().size()!=0) {%>
-							<%for(int i = 0 ; i < mail.getListAttachment().size(); i++){ %>
-								<option value="${i }"><%=mail.getListAttachment().get(i).getFileName() %></option>
+						<%if(mail.getAttachments()!= null && mail.getAttachments().size()!=0) {%>
+						<%Iterator<Attachment> iter =  mail.getAttachments().iterator();%>
+							<%while(iter.hasNext()){ 
+								Attachment att = iter.next();
+							%>
+								<option value="${att.getId() }"><%=att.getFileName() %></option>
 							<%} %>
 						<%} %>
 					<%} %>

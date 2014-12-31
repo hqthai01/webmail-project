@@ -1,4 +1,4 @@
-<%@page import="model.dao.OrganizationDAOMock"%>
+<%@page import="model.dao.OrganizationDAO"%>
 <%@page import="model.Organization"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,11 +10,9 @@
 	<title>Register</title>
 	<link rel="stylesheet" type="text/css" href="css/register.css">
 	
-	<% 
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		
-		List<Organization> list = OrganizationDAOMock.getOrganizations();
+	<%
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
 	%>
 </head>
 
@@ -31,6 +29,7 @@
 			<input name="phone" type="text" id="tf_phone" value="${requestScope.phone }"/>
 			<select name="org" id="select_org">
 			<%
+				List<Organization> list = OrganizationDAO.getOrganizations();
 				for(Organization org : list){
 			%>
 					<option value="<%=org.getOrgDomain()%>"><%="@"+org.getOrgDomain() %></option>
