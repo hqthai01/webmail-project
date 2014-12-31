@@ -1,3 +1,4 @@
+<%@page import="java.util.Iterator"%>
 <%@page import="java.sql.Date"%>
 <%@page import="model.Mail"%>
 <%@page import="model.MailBox"%>
@@ -56,8 +57,9 @@
 						<tbody>
 							<%
 								if (mb != null && mb.getMails().size() != 0) {
+									Iterator<Mail> iter = mb.getMails().iterator();
 									for (int i = 0; i < mb.getMails().size(); i++) {
-										Mail mail = mb.getMails().get(i);
+										Mail mail = iter.next();
 										if (mail.getFlag() == Mail.FLAG_SENT) {
 							%>
 							<tr>

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.OrganizationDAOMock;
+import model.Certificate;
+import model.Organization;
+import model.dao.OrganizationDAO;
 import net.cateam.service.verify.WebserviceClient;
 import util.PropertyLoader;
 import util.TerminalUtils;
@@ -29,7 +32,7 @@ public class DoRegisterOrg extends HttpServlet {
 
 	protected void doProc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		// response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
 		String orgDomain = (String) request.getParameter("orgdomain");
@@ -37,7 +40,6 @@ public class DoRegisterOrg extends HttpServlet {
 		String orgCert = (String) session.getAttribute("filename");
 
 		String orgPath = PropertyLoader.getProperty("certificate");
-		// downloadCertificate(request, response, orgPath);
 		request.setAttribute("orgdomain", orgDomain);
 		request.setAttribute("orgname", orgName);
 
@@ -48,8 +50,8 @@ public class DoRegisterOrg extends HttpServlet {
 		if (isNull(orgDomain, orgName)) {
 			request.setAttribute("flag", "fields cannot be empty");
 		} else {
-			if (OrganizationDAOMock.isExistOrg(orgDomain)) {
-
+			if (OrganizationDAO.isExistOrg(orgDomain)) {
+				session.setAttribute("flag", "Organization is exist");
 			} else {
 				// verify certificate
 				String command = "mkdir -p " + (orgPath + "/" + orgDomain);
@@ -60,21 +62,29 @@ public class DoRegisterOrg extends HttpServlet {
 				System.out.println(command);
 				TerminalUtils.doCommand(command);
 				if (WebserviceClient.verify(orgPath + "/" + orgDomain + "/" + orgCert)) {
-					// create new Organization
-					// create Certificate
-					// insert organization to database
-					// insert certificate to database
-					request.setAttribute("flag", "Your certificate is ok");
+					File file = new File(orgPath +"/" +orgDomain +"/"+orgCert);
+					Certificate certificate = new Certificate();
+					certificate.setFileName(file.getName());
+					certificate.setFilePath(file.getAbsolutePath());
+					
+					Organization org = new Organization();
+					org.setOrgDomain(orgDomain);
+					org.setOrgName(orgName);
+					org.setCertificate(certificate);
+
+					OrganizationDAO.insert(org);
+					
+					session.setAttribute("flag", "Your certificate is ok");
 					session.removeAttribute("filename");
-					TerminalUtils.removeFile(orgPath + "/test/"+orgCert);
+					TerminalUtils.removeFile(orgPath + "/test/" + orgCert);
 				} else {
 					TerminalUtils.removeFile(orgPath + "/" + orgDomain);
 					TerminalUtils.removeFile(orgPath + "/test/" + orgCert);
-					request.setAttribute("flag", "Your certificate is fake, please try others");
+					session.setAttribute("flag", "Your certificate is fake, please try others");
 				}
 			}
 		}
-		request.getRequestDispatcher("/org_regis.jsp").forward(request, response);
+		request.getRequestDispatcher("/forward_page.jsp").forward(request, response);
 
 	}
 

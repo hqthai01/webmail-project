@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.MailBoxDAOMock;
-import model.dao.UserDAOMock;
+import model.dao.UserDAO;
 
 /**
  * Servlet implementation class DoLogin
@@ -52,17 +51,15 @@ public class DoLogin extends HttpServlet {
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			} else {
 				session.setAttribute("username", username);
-				session.setAttribute("mailbox", MailBoxDAOMock.getMailBox(username));
+				session.setAttribute("mailbox", UserDAO.getUser(username).getMailBox());
 				request.getRequestDispatcher("/inbox.jsp").forward(request, response);
 			}
-		} else if (action.equalsIgnoreCase("register")) {
-//			request.getRequestDispatcher("Register").forward(request, response);
-		}
+		} 
 	}
 
 	private boolean checkLogin(String username, String password) {
 		try {
-			return UserDAOMock.checkUser(username,password);
+			return UserDAO.checkUser(username,password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

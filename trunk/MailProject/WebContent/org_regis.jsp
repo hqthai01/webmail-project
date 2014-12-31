@@ -27,7 +27,8 @@
 		<div id="div_bottom">
 			<input id="form_input4" type="submit" name="action" value="Register" form="org_register"/>
 		</div>
-		<center><h2>${requestScope.flag}</h2></center>
+		<center><h2>${sessionScope.flag}</h2></center>
+		<%session.removeAttribute("flag"); %>
 	</div>
 
 </body>

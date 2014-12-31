@@ -1,8 +1,8 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class MailBox implements Serializable {
@@ -17,10 +18,10 @@ public class MailBox implements Serializable {
 	private static final long serialVersionUID = 0xAF1L;
 
 	private int mailboxId;
-	private List<Mail> mails;
+	private Set<Mail> mails;
 	
 	public MailBox(){
-		mails = new ArrayList<Mail>();
+		mails = new HashSet<Mail>();
 	}
 
 	@Id
@@ -33,13 +34,19 @@ public class MailBox implements Serializable {
 		this.mailboxId = mailboxId;
 	}
 
-	@OneToMany(targetEntity=Mail.class,mappedBy="mailbox",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	public List<Mail> getMails() {
+	@OneToMany(targetEntity=Mail.class,mappedBy="mailbox",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OrderBy("date ASC")
+	public Set<Mail> getMails() {
 		return mails;
 	}
 
-	public void setMails(List<Mail> mails) {
+	public void setMails(Set<Mail> mails) {
 		this.mails = mails;
+	}
+
+	@Override
+	public String toString() {
+		return "MailBox [mailboxId=" + mailboxId + ", mails=" + mails.size() + "]";
 	}
 	
 }
