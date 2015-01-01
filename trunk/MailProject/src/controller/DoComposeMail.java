@@ -30,6 +30,7 @@ public class DoComposeMail extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		session.removeAttribute("mail");
 		session.setAttribute("mailbox", UserDAO.getUser((String)session.getAttribute("username")).getMailBox());
 		request.getRequestDispatcher("/compose_mail.jsp").forward(request, response);
 	}

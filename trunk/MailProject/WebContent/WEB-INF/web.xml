@@ -119,4 +119,14 @@
     <servlet-name>DoVerify</servlet-name>
     <url-pattern>/DoVerify</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoDownload</display-name>
+    <servlet-name>DoDownload</servlet-name>
+    <servlet-class>controller.DoDownload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoDownload</servlet-name>
+    <url-pattern>/DoDownload</url-pattern>
+  </servlet-mapping>
 </web-app>
