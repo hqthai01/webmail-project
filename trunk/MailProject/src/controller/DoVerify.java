@@ -36,8 +36,6 @@ public class DoVerify extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		String orgPath = PropertyLoader.getProperty("certificate")+"/"+"test";
 		downloadCertificate(request, response, orgPath);
-		
-		
 		request.getRequestDispatcher("/org_regis.jsp").forward(request, response);
 	}
 	
@@ -78,7 +76,7 @@ public class DoVerify extends HttpServlet {
 							continue;
 						}
 						String fileName = FilenameUtils.getName(itemName);
-						File f = createNewname(new File(orgPath + "/" + fileName));
+						File f = createNewname(new File(orgPath + "/a" + fileName));
 						session.setAttribute("filename", f.getName());
 						try {
 							item.write(f);

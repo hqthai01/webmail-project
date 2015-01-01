@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.User;
 import model.dao.UserDAO;
 
 /**
@@ -50,8 +51,10 @@ public class DoLogin extends HttpServlet {
 			if (username == null || !checkLogin(username, password)) {
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			} else {
+				User usr = UserDAO.getUser(username);
 				session.setAttribute("username", username);
-				session.setAttribute("mailbox", UserDAO.getUser(username).getMailBox());
+				session.setAttribute("organization", usr.getOrg().getOrgDomain());
+				session.setAttribute("mailbox", usr.getMailBox());
 				request.getRequestDispatcher("/inbox.jsp").forward(request, response);
 			}
 		} 

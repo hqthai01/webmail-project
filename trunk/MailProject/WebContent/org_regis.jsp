@@ -19,8 +19,8 @@
 		<div id="div_left"></div>
 		<div id="div_right">
 			<form id="org_register" name="regisorg" action="DoRegisterOrg" method="post">
-				<input id="form_input1" type="text" name="orgdomain" value="${requestScope.orgdomain }"/>
-				<input id="form_input2" type="text" name="orgname" value="${requestScope.orgname }"/>
+				<input id="form_input1" type="text" name="orgdomain" value="${sessionScope.orgdomain }"/>
+				<input id="form_input2" type="text" name="orgname" value="${sessionScope.orgname }"/>
 				<input id="form_input3" type="button" name="orgcertificate" onclick="showpopup('browse_file.jsp', 300, 200)" value="${sessionScope.filename }"/>
 			</form>
 		</div>	
@@ -28,7 +28,11 @@
 			<input id="form_input4" type="submit" name="action" value="Register" form="org_register"/>
 		</div>
 		<center><h2>${sessionScope.flag}</h2></center>
-		<%session.removeAttribute("flag"); %>
+		<%
+			session.removeAttribute("flag"); 
+			session.removeAttribute("orgdomain"); 
+			session.removeAttribute("orgname"); 
+		%>
 	</div>
 
 </body>

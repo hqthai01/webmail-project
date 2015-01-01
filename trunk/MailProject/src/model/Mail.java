@@ -16,7 +16,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Mail implements Serializable {
+public class Mail implements Serializable, Comparable<Mail>{
+
+//	@Override
+//	public int compare(Mail o1, Mail o2) {
+//		return o1.getDate().compareTo(o2.getDate());
+//	}
+
+	@Override
+	public int compareTo(Mail o) {
+		return o.getDate().compareTo(this.getDate());
+	}
+
 	private static final long serialVersionUID = 0xAF1L;
 
 	public static final int FLAG_UNREAD = 0x3A6;

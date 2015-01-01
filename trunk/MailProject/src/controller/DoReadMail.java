@@ -43,6 +43,8 @@ public class DoReadMail extends HttpServlet {
 		} else if (pos != null && RegexUtil.isNumber(pos)) {
 			Mail mail = MailDAO.getMail(Integer.parseInt(pos));
 			request.setAttribute("mail", mail);
+			
+			
 
 			if (mail != null) {
 				if (mail.getFlag() == Mail.FLAG_UNREAD) {

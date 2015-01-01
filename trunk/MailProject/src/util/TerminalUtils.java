@@ -81,7 +81,12 @@ public class TerminalUtils {
 		command += "$JAVA_HOME/wsimport -keep -p net.cateam.service.verify " + serviceLink + " ; ";
 		command += "nemo " + folderStore;
 
+		System.out.println(command);
 		doCommand(command);
 
 	}
+	
+//	public static void main(String[] args) {
+//		TerminalUtils.getServices("/home/hqthai01/Desktop/services", "http://192.168.101.100:9898/verify?wsdl");
+//	}
 }

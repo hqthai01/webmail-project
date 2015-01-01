@@ -15,4 +15,17 @@ public class RegexUtil {
 			return false;
 		}
 	}
+	
+	public static boolean isMailAddress(String mailAddress){
+		try {
+			String regex="\\w+@\\w+(\\.\\w+)+";
+			Pattern p = Pattern.compile(regex);
+			Matcher matcher = p.matcher(mailAddress);
+			return matcher.matches();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 }

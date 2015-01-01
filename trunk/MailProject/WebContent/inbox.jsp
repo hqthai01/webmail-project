@@ -1,3 +1,6 @@
+<%@page import="util.SortObjectUtils"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Collection"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.lang.ProcessBuilder.Redirect"%>
@@ -60,6 +63,7 @@
 						<tbody>
 							<%
 								if (mb != null && mb.getMails().size() != 0) {
+									
 									Iterator<Mail> iter = mb.getMails().iterator();
 									while(iter.hasNext()) {
 										Mail mail = iter.next();
@@ -101,9 +105,11 @@
 						<tbody>
 							<%
 								if (mb != null && mb.getMails().size() != 0) {
+// 									mb.setMails(SortObjectUtils.sort(mb.getMails()));
 									Iterator<Mail> iter = mb.getMails().iterator();
 									while(iter.hasNext()) {
 										Mail mail = iter.next();
+										System.out.println(mail.getDate());
 										if (mail.getFlag() == Mail.FLAG_READ) {
 							%>
 							<tr>
