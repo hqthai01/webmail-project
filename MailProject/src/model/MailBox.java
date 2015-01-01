@@ -10,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+
+import org.hibernate.annotations.Sort;
+import org.hibernate.annotations.SortType;
 
 @Entity
 public class MailBox implements Serializable {
@@ -35,7 +37,7 @@ public class MailBox implements Serializable {
 	}
 
 	@OneToMany(targetEntity=Mail.class,mappedBy="mailbox",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@OrderBy("date ASC")
+	@Sort(type=SortType.NATURAL)
 	public Set<Mail> getMails() {
 		return mails;
 	}

@@ -34,6 +34,7 @@
 	<%} %>
 </head>
 <body>
+<center><h2>${requestScope.flag}</h2></center>
 	<div id="div_main">
 		<div id="div0"></div>
 		<div id="div1">
@@ -53,7 +54,7 @@
 		<div id="div2">
 			<div id="div_top">
 				<div id="div_address">
-					<input id="tf_from" name="from" type="text" /><br />
+					<input id="tf_from" readonly="readonly" name="from" type="text" value="${sessionScope.username}@${sessionScope.organization}"/><br />
 					<input id="tf_to" name="to" type="text" /><br />
 					<input id="tf_subject" name="subject" type="text" />
 				</div>

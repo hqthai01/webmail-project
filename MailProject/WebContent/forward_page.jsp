@@ -7,6 +7,10 @@
 <title>${sessionScope.username}</title>
 </head>
 <body>
-	<jsp:forward page="org_regis.jsp"></jsp:forward>
+	<%
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Refresh", "0;url=org_regis.jsp");
+	%>
 </body>
 </html>

@@ -58,15 +58,15 @@
 							<%
 								if (mb != null && mb.getMails().size() != 0) {
 									Iterator<Mail> iter = mb.getMails().iterator();
-									for (int i = 0; i < mb.getMails().size(); i++) {
+									while(iter.hasNext()) {
 										Mail mail = iter.next();
 										if (mail.getFlag() == Mail.FLAG_SENT) {
 							%>
 							<tr>
-								<td id="from_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getMail_From()%></a></td>
-								<td id="subject_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getSubject()%></a></td>
-								<td id="attach_width"><a href="DoReadMail?pos=<%=i%>"><%=mail.getAttachments().size()%></a></td>
-								<td id="date_width"><a href="DoReadMail?pos=<%=i%>"><%=new Date(mail.getDate().getTime())%></a></td>
+								<td id="from_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=mail.getMail_From()%></a></td>
+								<td id="subject_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=mail.getSubject()%></a></td>
+								<td id="attach_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=mail.getAttachments().size()%></a></td>
+								<td id="date_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=new Date(mail.getDate().getTime())%></a></td>
 							</tr>
 
 							<%

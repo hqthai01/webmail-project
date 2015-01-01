@@ -40,15 +40,15 @@ public class DoRegisterOrg extends HttpServlet {
 		String orgCert = (String) session.getAttribute("filename");
 
 		String orgPath = PropertyLoader.getProperty("certificate");
-		request.setAttribute("orgdomain", orgDomain);
-		request.setAttribute("orgname", orgName);
+		session.setAttribute("orgdomain", orgDomain);
+		session.setAttribute("orgname", orgName);
 
 		System.out.println(orgDomain);
 		System.out.println(orgName);
 		System.out.println(orgCert);
 
 		if (isNull(orgDomain, orgName)) {
-			request.setAttribute("flag", "fields cannot be empty");
+			session.setAttribute("flag", "fields cannot be empty");
 		} else {
 			if (OrganizationDAO.isExistOrg(orgDomain)) {
 				session.setAttribute("flag", "Organization is exist");
@@ -58,11 +58,12 @@ public class DoRegisterOrg extends HttpServlet {
 				System.out.println(command);
 				TerminalUtils.doCommand(command);
 
-				command = "cp " + (orgPath + "/test/" + orgCert) + " " + orgPath + "/" + orgDomain + "/" + orgCert;
+				String newName = orgDomain+".crt";
+				command = "cp " + (orgPath + "/test/" + orgCert) + " " + orgPath + "/" + orgDomain + "/" + newName;
 				System.out.println(command);
 				TerminalUtils.doCommand(command);
-				if (WebserviceClient.verify(orgPath + "/" + orgDomain + "/" + orgCert)) {
-					File file = new File(orgPath +"/" +orgDomain +"/"+orgCert);
+				if (WebserviceClient.verify(orgPath + "/" + orgDomain + "/" + newName)) {
+					File file = new File(orgPath +"/" +orgDomain +"/"+newName);
 					Certificate certificate = new Certificate();
 					certificate.setFileName(file.getName());
 					certificate.setFilePath(file.getAbsolutePath());
@@ -74,7 +75,7 @@ public class DoRegisterOrg extends HttpServlet {
 
 					OrganizationDAO.insert(org);
 					
-					session.setAttribute("flag", "Your certificate is ok");
+					session.setAttribute("flag", "Your certificate is ok your domain is registered");
 					session.removeAttribute("filename");
 					TerminalUtils.removeFile(orgPath + "/test/" + orgCert);
 				} else {
