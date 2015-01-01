@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import model.Mail;
 import model.MailBox;
+import model.Organization;
 import model.dao.MailBoxDAO;
 import model.dao.MailDAO;
+import model.dao.OrganizationDAO;
+import net.cateam.service.verify.WebserviceClient;
 import util.RegexUtil;
 
 /**
@@ -39,25 +42,38 @@ public class DoReadMail extends HttpServlet {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("username") == null) {
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
-			
+
 		} else if (pos != null && RegexUtil.isNumber(pos)) {
 			Mail mail = MailDAO.getMail(Integer.parseInt(pos));
-			request.setAttribute("mail", mail);
-			
-			
+			session.setAttribute("mail", mail);
 
 			if (mail != null) {
+				if (!verifyCertificate(mail) && mail.getFlag() != Mail.FLAG_SENT) {
+					request.setAttribute("flag", "Mail from untrusted organization");
+				}
+
 				if (mail.getFlag() == Mail.FLAG_UNREAD) {
 					mail.setFlag(Mail.FLAG_READ);
 					MailDAO.update(mail);
-					MailBox mb = (MailBox)session.getAttribute("mailbox");
+					MailBox mb = (MailBox) session.getAttribute("mailbox");
 					session.setAttribute("mailbox", MailBoxDAO.getMailBox(mb.getMailboxId()));
-					
+
 				}
 			}
 
 			request.getRequestDispatcher("/read_mail.jsp").forward(request, response);
 		}
+	}
+
+	private boolean verifyCertificate(Mail mail) {
+		String from = mail.getMail_From();
+		String orgDomain = from.substring(from.indexOf("@") + 1, from.length());
+		Organization org = OrganizationDAO.getOrganization(orgDomain);
+		if (org == null) {
+			return false;
+		}
+
+		return WebserviceClient.verify(org.getCertificate().getFilePath());
 	}
 
 }

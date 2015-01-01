@@ -1,8 +1,9 @@
 package model;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,10 +21,10 @@ public class MailBox implements Serializable {
 	private static final long serialVersionUID = 0xAF1L;
 
 	private int mailboxId;
-	private Set<Mail> mails;
+	private SortedSet<Mail> mails;
 	
 	public MailBox(){
-		mails = new HashSet<Mail>();
+		mails = new TreeSet<Mail>();
 	}
 
 	@Id
@@ -42,7 +43,7 @@ public class MailBox implements Serializable {
 		return mails;
 	}
 
-	public void setMails(Set<Mail> mails) {
+	public void setMails(SortedSet<Mail> mails) {
 		this.mails = mails;
 	}
 

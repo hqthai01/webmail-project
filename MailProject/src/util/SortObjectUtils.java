@@ -2,10 +2,10 @@ package util;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import model.Mail;
 
@@ -14,7 +14,7 @@ import model.Mail;
  * Jan 1, 2015
  */
 public class SortObjectUtils {
-	public static Set<Mail> sort(Set<Mail> mails){
+	public static SortedSet<Mail> sort(SortedSet<Mail> mails){
 		List<Mail> list = new ArrayList<Mail>();
 		Iterator<Mail> iter = mails.iterator();
 		while(iter.hasNext()){
@@ -22,7 +22,7 @@ public class SortObjectUtils {
 		}
 		
 		Collections.sort(list);
-		HashSet<Mail> out = new HashSet<Mail>();
+		TreeSet<Mail> out = new TreeSet<Mail>();
 		Mail temp;
 		for(int i = 1 ; i <list.size()-1;i++){
 			for(int j =list.size() -1 ; j>=i;j--){

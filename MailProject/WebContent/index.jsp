@@ -21,7 +21,7 @@
 			<input name="action" type="submit" id="sm_login" value="Login" />
 			<input name="action" type="submit" id="sm_register" value="Register" form="register_form"/>
 		</div>
-		</form>
-	
+	</form>
+	<center><h2 style="color:red">${requestScope.flag }</h2></center>
 </body>
 </html>
