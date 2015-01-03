@@ -44,10 +44,14 @@ public class DoSendMail extends HttpServlet {
 	private void doProc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		if (session.getAttribute("username") == null) {
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			return;
+		}
 
 		String action = (String) request.getParameter("action");
 		if (action != null) {
-			HttpSession session = request.getSession();
 			@SuppressWarnings("unchecked")
 			List<FileItem> items = (List<FileItem>) session.getAttribute("items");
 			if (items != null) {
@@ -156,6 +160,8 @@ public class DoSendMail extends HttpServlet {
 								return;
 							}
 						}
+					} else {
+						request.setAttribute("flag", "The address you want to sent to is incorrect");
 					}
 
 				}
@@ -167,7 +173,7 @@ public class DoSendMail extends HttpServlet {
 					String to = (String) request.getParameter("to");
 					String subject = (String) request.getParameter("subject");
 					String message = (String) request.getParameter("message");
-
+					System.out.println(RegexUtil.isMailAddress(to));
 					if (RegexUtil.isMailAddress(to)) {
 						String to_username = to.substring(0, to.indexOf("@"));
 						String to_organization = to.substring(to.indexOf("@") + 1, to.length());
@@ -201,7 +207,7 @@ public class DoSendMail extends HttpServlet {
 								mail_to.setDate(new Date());
 								mail_to.setMailbox(usr.getMailBox());
 								MailDAO.insert(mail_to);
-								
+
 								session.setAttribute("mailbox", UserDAO.getUser(username).getMailBox());
 								session.removeAttribute("items");
 								request.setAttribute("flag", "Your mail is sent");
@@ -209,6 +215,8 @@ public class DoSendMail extends HttpServlet {
 								return;
 							}
 						}
+					} else {
+						request.setAttribute("flag", "The address you want to sent to is incorrect");
 					}
 				}
 			}
