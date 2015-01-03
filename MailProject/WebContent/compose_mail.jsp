@@ -24,17 +24,10 @@
 	if (session.getAttribute("username") == null || session.getAttribute("username")=="") {
 		%>
 		<jsp:forward page="/index.jsp"></jsp:forward>	
-		<%} else{%>
-		<%
-	} %>
-	
-	<%if((String)request.getAttribute("flag") != null){ %>
-		<%request.setAttribute("flag", null); %>
-		<jsp:forward page="DoComposeMail"></jsp:forward>
-	<%} %>
+		<%} %>
 </head>
 <body>
-<center><h2>${requestScope.flag}</h2></center>
+<center><h2> ${requestScope.flag}</h2></center>
 	<div id="div_main">
 		<div id="div0"></div>
 		<div id="div1">
