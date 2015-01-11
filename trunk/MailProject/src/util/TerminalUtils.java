@@ -87,6 +87,6 @@ public class TerminalUtils {
 	}
 	
 	public static void main(String[] args) {
-		TerminalUtils.getServices("/home/hqthai01/Desktop/services", "http://192.168.101.101:9898/verify?wsdl");
+		TerminalUtils.getServices("/home/hqthai01/Desktop/services", PropertyLoader.getProperty("service_link"));
 	}
 }

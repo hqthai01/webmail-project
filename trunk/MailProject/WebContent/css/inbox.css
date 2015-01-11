@@ -83,4 +83,9 @@ a {
 	display: block;
 	text-decoration: none;
 	height: 100%;
+	color:black;
+}
+
+a:visited{
+	color:black;
 }
