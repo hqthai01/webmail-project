@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1 style="text-align: center;">${requestScope.flag}</h1>
-<%response.setHeader("Refresh","5;url=index.jsp"); %>
+<%response.setHeader("Refresh","3;url=index.jsp"); %>
 </body>
 </html>

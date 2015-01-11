@@ -86,6 +86,7 @@ public class Mail implements Serializable, Comparable<Mail>{
 		this.subject = subject;
 	}
 
+	@Column(columnDefinition="TEXT")
 	public String getMessage() {
 		return message;
 	}

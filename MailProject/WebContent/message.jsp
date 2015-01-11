@@ -10,6 +10,6 @@
 <h1 style="text-align: center;">${requestScope.flag}</h1>
 <%
 session.removeAttribute("items");
-response.setHeader("Refresh","5;url=inbox.jsp"); %>
+response.setHeader("Refresh","3;url=inbox.jsp"); %>
 </body>
 </html>

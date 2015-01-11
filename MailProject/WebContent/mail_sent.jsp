@@ -46,7 +46,7 @@
 			<div id="div_top">
 				<table width="99%" border="0">
 					<tr>
-						<th id="from_width">From</th>
+						<th id="from_width">To</th>
 						<th id="subject_width">Subject</th>
 						<th id="attach_width">Attachment</th>
 						<th id="date_width">Date</th>
@@ -63,7 +63,7 @@
 										if (mail.getFlag() == Mail.FLAG_SENT) {
 							%>
 							<tr>
-								<td id="from_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=mail.getMail_From()%></a></td>
+								<td id="from_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=mail.getMail_To()%></a></td>
 								<td id="subject_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=mail.getSubject()%></a></td>
 								<td id="attach_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=mail.getAttachments().size()%></a></td>
 								<td id="date_width"><a href="DoReadMail?pos=<%=mail.getId()%>"><%=new Date(mail.getDate().getTime())%></a></td>

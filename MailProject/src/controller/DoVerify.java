@@ -33,7 +33,10 @@ public class DoVerify extends HttpServlet {
 		doProc(request, response);
 	}
 	protected void doProc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
+		
 		String orgPath = PropertyLoader.getProperty("certificate")+"/"+"test";
 		downloadCertificate(request, response, orgPath);
 		request.getRequestDispatcher("/org_regis.jsp").forward(request, response);

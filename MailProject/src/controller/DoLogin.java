@@ -55,6 +55,7 @@ public class DoLogin extends HttpServlet {
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			} else {
 				User usr = UserDAO.getUser(username);
+				System.out.println(verify(usr.getOrg()));
 				if (verify(usr.getOrg())) {
 					session.setAttribute("username", username);
 					session.setAttribute("organization", usr.getOrg().getOrgDomain());

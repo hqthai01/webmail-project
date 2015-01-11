@@ -45,19 +45,21 @@ public class DoReadMail extends HttpServlet {
 
 		} else if (pos != null && RegexUtil.isNumber(pos)) {
 			Mail mail = MailDAO.getMail(Integer.parseInt(pos));
-			session.setAttribute("mail", mail);
+			MailBox mb = (MailBox) session.getAttribute("mailbox");
 
 			if (mail != null) {
-				if (!verifyCertificate(mail) && mail.getFlag() != Mail.FLAG_SENT) {
-					request.setAttribute("flag", "Mail from untrusted organization");
-				}
+				if (mb.getMailboxId() == mail.getMailbox().getMailboxId()) {
+					session.setAttribute("mail", mail);
 
-				if (mail.getFlag() == Mail.FLAG_UNREAD) {
-					mail.setFlag(Mail.FLAG_READ);
-					MailDAO.update(mail);
-					MailBox mb = (MailBox) session.getAttribute("mailbox");
-					session.setAttribute("mailbox", MailBoxDAO.getMailBox(mb.getMailboxId()));
+					if (!verifyCertificate(mail) && mail.getFlag() != Mail.FLAG_SENT) {
+						request.setAttribute("flag", "Mail from untrusted organization");
+					}
 
+					if (mail.getFlag() == Mail.FLAG_UNREAD) {
+						mail.setFlag(Mail.FLAG_READ);
+						MailDAO.update(mail);
+						session.setAttribute("mailbox", MailBoxDAO.getMailBox(mb.getMailboxId()));
+					}
 				}
 			}
 
